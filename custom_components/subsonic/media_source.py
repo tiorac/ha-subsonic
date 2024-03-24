@@ -395,16 +395,16 @@ class SubsonicSource(MediaSource):
 
     async def async_list_songs_album(self, albumId: str) -> list[BrowseMediaSource]:
         items: list[BrowseMediaSource] = []
-
         album = await self.api.getAlbum(albumId)
-        coveart = None
-
-        if ("coverArt" in album
-            and album["coverArt"] is not None
-            and album["coverArt"] != ""):
-            coveart = self.api.getCoverArtUrl(album["coverArt"])
 
         for song in album["songs"]:
+            coveart = None
+
+            if ("coverArt" in album
+                and album["coverArt"] is not None
+                and album["coverArt"] != ""):
+                coveart = self.api.getCoverArtUrl(album["coverArt"])
+
             items.append(
                 BrowseMediaSource(
                     domain=DOMAIN,
