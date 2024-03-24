@@ -1,0 +1,37 @@
+{
+    "config": {
+        "step": {
+            "user": {
+                "description": "Subsonic Setup",
+                "data": {
+                    "url": "URL",
+                    "user": "User",
+                    "password": "Password",
+                    "app": "Application",
+                    "app_options": {
+                        "navidrome": "Navidrome",
+                        "subsonic": "Subsonic or compatible"
+                    },
+                    "title": "Title"
+                }
+            }
+        },
+        "error": {
+            "cannot_connect": "Cannot connect to Subsonic app. Please check your settings and try again."
+        }
+    },
+    "options": {
+        "step": {
+            "init": {
+                "description": "Choose itens to show in the browser",
+                "data": {
+                    "artists": "Artists",
+                    "albums": "Albums",
+                    "playlists": "Playlists",
+                    "genres": "Genres",
+                    "radio": "Radios"
+                }
+            }
+        }
+    }
+}

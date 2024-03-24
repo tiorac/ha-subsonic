@@ -1,0 +1,7 @@
+{
+    "domain": "subsonic",
+    "name": "Subsonic",
+    "codeowners": ["tiorac"],
+    "version": "0.1.1",
+    "config_flow": true
+}

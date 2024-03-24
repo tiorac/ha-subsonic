@@ -1,0 +1,6 @@
+{
+    "name": "Navidrome",
+    "domains": ["navidrome"],
+    "render_readme": false,
+    "homeassistant": "0.110.2"
+  }
