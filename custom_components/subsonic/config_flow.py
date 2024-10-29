@@ -10,10 +10,10 @@ class SubsonicConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
     VERSION = 1
     MINOR_VERSION = 1
 
-    async def validate_input(self, data) -> bool:
+    async def validate_input(self, config: dict) -> bool:
         userAgent = "HomeAssistant"
         
-        api = SubsonicApi(userAgent=userAgent, entry=data)
+        api = SubsonicApi(userAgent=userAgent, config=config)
         if not await api.ping():
             return False
         return True
@@ -48,21 +48,10 @@ class SubsonicConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
                 "albums": True,
                 "playlists": True,
                 "genres": True,
-                "radio": True if app == "navidrome" else False,
+                "radio": True,
             }
 
-            entry = ConfigEntry(
-                version=1,
-                minor_version=1,
-                domain=DOMAIN,
-                title=title,
-                data=data,
-                options=options,
-                source=None,
-                unique_id=None,
-            )
-
-            if await self.validate_input(entry):
+            if await self.validate_input(data):
                 return self.async_create_entry(title=title, data=data, options=options)
             else:
                 return self.async_show_form(step_id="user", data_schema=vol.Schema(schema), errors={"base": "cannot_connect"})

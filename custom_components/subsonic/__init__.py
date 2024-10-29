@@ -17,7 +17,7 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
 
     navidrome = SubsonicApi(session=session, 
                             userAgent=userAgent,
-                            entry=entry)
+                            config=entry.data)
 
     try:
         result = await navidrome.ping()

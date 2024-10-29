@@ -11,14 +11,13 @@ from .xmlHelper import getAttributes, \
     getTagAttributes, \
     getTagsAttributesToList, \
     getTagsTexts
-from homeassistant.config_entries import ConfigEntry
 
 
 @dataclass
 class SubsonicApi:
 
     userAgent: str
-    entry: ConfigEntry
+    config: dict
     requestTimeout: float = 8.0
     apiVersion: str = "1.16.1"
     session: aiohttp.client.ClientSession | None = None
@@ -40,16 +39,13 @@ class SubsonicApi:
         return secrets.token_hex(5)
     
     def __getProperty(self, property, dafultValue=None):
-        if self.entry is None:
+        if self.config is None:
+            return dafultValue
+
+        if property not in self.config:
             return dafultValue
         
-        if self.entry.data is None:
-            return dafultValue
-        
-        if property not in self.entry.data:
-            return dafultValue
-        
-        return self.entry.data[property]
+        return self.config[property]
 
     def __generateToken(self, password: str, salt: str) -> str:
         return hashlib.md5((password + salt).encode()).hexdigest()
